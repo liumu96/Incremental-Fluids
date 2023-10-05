@@ -5,3 +5,4 @@ project("incremental-fluids")
 set(SRC "../loadpng/lodepng.h" "../loadpng/lodepng.cpp")
 
 add_subdirectory(1-matrixless)
+add_subdirectory(2-better-advection)
