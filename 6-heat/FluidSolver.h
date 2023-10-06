@@ -458,8 +458,6 @@ public:
         _u->fillSolidFields(_bodies);
         _v->fillSolidFields(_bodies);
 
-        setBoundaryCondition();
-
         /* Right-hand side of heat equation is the current heat distribution */
         memcpy(_r, _t->src(), _w * _h * sizeof(double));
         buildHeatDiffusionMatrix(timestep);
