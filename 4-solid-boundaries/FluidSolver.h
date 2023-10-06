@@ -386,6 +386,9 @@ public:
             int shade = (int)((1.0 - _d->src()[i]) * 255.0);
             shade = max(min(shade, 255), 0);
 
+            if (_d->cell()[i] == CELL_SOLID)
+                shade = 0.0;
+
             rgba[i * 4 + 0] = shade;
             rgba[i * 4 + 1] = shade;
             rgba[i * 4 + 2] = shade;
