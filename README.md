@@ -43,13 +43,13 @@ Start with an initial divergence-free velocity field $\vec u^0$.
 
 ## Render Results
 
-| Notes                 | Render Results                                    |
-| --------------------- | ------------------------------------------------- |
-| 1-matrixless          | ![](./1-matrixless/result/0001-0400.gif)          |
-| 2-better-advection    | ![](./2-better-advection/result/0001-0400.gif)    |
-| 3-conjugate-gradients | ![](./3-conjugate-gradients/result/0001-0087.gif) |
-| 4-solid-boundaries    | ![](./4-solid-boundaries/result/0001-0400.gif)    |
-| 5-curved-boundaries   | ![](./5-curved-boundaries/result/0001-0400.gif)   |
-| 6-heat                | ![](./6-heat/result/0001-0160.gif)                |
-| 7-variable-density    | ![](./7-variable-density/result/0001-0400.gif)    |
-| 8-flip                | ![](./8-flip/result/0001-0800.gif)                |
+| Notes                                    | Render Results                                    |
+| ---------------------------------------- | ------------------------------------------------- |
+| [1-matrixless](./1-matrixless/README.md) | ![](./1-matrixless/result/0001-0400.gif)          |
+| 2-better-advection                       | ![](./2-better-advection/result/0001-0400.gif)    |
+| 3-conjugate-gradients                    | ![](./3-conjugate-gradients/result/0001-0087.gif) |
+| 4-solid-boundaries                       | ![](./4-solid-boundaries/result/0001-0400.gif)    |
+| 5-curved-boundaries                      | ![](./5-curved-boundaries/result/0001-0400.gif)   |
+| 6-heat                                   | ![](./6-heat/result/0001-0160.gif)                |
+| 7-variable-density                       | ![](./7-variable-density/result/0001-0400.gif)    |
+| 8-flip                                   | ![](./8-flip/result/0001-0800.gif)                |
