@@ -156,7 +156,7 @@ $$
 q^{n+1} = q^n + \frac{2}{9}\Delta t k_1 + \frac{3}{9}\Delta t k_2 + \frac{4}{9}\Delta t k_4
 $$
 
-````cpp
+```cpp
 /* Third order Runge-Kutta for velocity integration in time */
 void rungeKutta3(double &x, double &y, double timestep, const FluidQuantity &u, const FluidQuantity &v) const {
     double firstU = u.lerp(x, y)/_hx;
@@ -178,9 +178,9 @@ void rungeKutta3(double &x, double &y, double timestep, const FluidQuantity &u, 
     y -= timestep*((2.0/9.0)*firstV + (3.0/9.0)*midV + (4.0/9.0)*lastV);
 }
 ```
-## Render Result
+
+### Render Result
 
 <div align="center">
 <img src="./result/0001-0400.gif" width="30%"/>
 </div>
-````
