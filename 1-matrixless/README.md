@@ -27,41 +27,35 @@ Start with an initial divergence-free velocity field $\vec u^0$.
 
   The first step is figuring out where this imaginary particle would have started from, a position we’ll call $\vec x_P$. The particle moves according to the simple ordinary differential equation
 
-  $$
-  \frac{d\vec x}{dt} = \vec u(\vec x)
-  $$
+$$
+\frac{d\vec x}{dt} = \vec u(\vec x)
+$$
 
-  $$
-  \vec x_P = \vec x_G - \Delta t \vec u(\vec x_G) \\
-  q_G^{n+1} = interpolate(q^n, \vec x_P) \\
-  q_i^{n+1} = (1 - \alpha)q_j^n + \alpha q_{j+1}^n
-  $$
+and ends up at $\vec x_G$ after time $\Delta t$. If we now run time backwards, we can go in reverse from to the start point of the particle—i.e., finding where a particle would end up under the reverse velocity field $\vec u$ “starting” from . Figure (3.1) illustrates this path. The simplest possible way to estimated $\vec x_P$ is to use one step of“forward” Euler going backwards in time:
 
-  and ends up at $\vec x_G$ after time $\Delta t$. If we now run time backwards, we can go in reverse from to the start point of the particle—i.e., finding where a particle would end up under the reverse velocity field $\vec u$ “starting” from . Figure (3.1) illustrates this path. The simplest possible way to estimated $\vec x_P$ is to use one step of“forward” Euler going backwards in time:
+$$
+\vec x_P = \vec x_G - \Delta t \vec u(\vec x_G)
+$$
 
-  $$
-  \vec x_P = \vec x_G - \Delta t \vec u(\vec x_G)
-  $$
+where we use the velocity $\vec u$ evaluated at the grid point to take a $\Delta t$-step backwards through the flow field. It turns out forward Euler is sometimes adequate, but significantly better results can be obtained using a slightly more sophisticated technique such as a higher-order `Runge-Kutta` method.
 
-  where we use the velocity $\vec u$ evaluated at the grid point to take a $\Delta t$-step backwards through the flow field. It turns out forward Euler is sometimes adequate, but significantly better results can be obtained using a slightly more sophisticated technique such as a higher-order `Runge-Kutta` method.
+We now know the position where the imaginary particle started; next we have to figure out what old value of q it had. Most likely $\vec x_P$ is not on the grid, so we don’t have the exact value, but we can get a good approximation by interpolating from $q^n$ at nearby grid points. Trilinear (bilinear in two dimensions) interpolation is often used, though this comes with a serious penalty which we will fix at the end of the chapter.
 
-  We now know the position where the imaginary particle started; next we have to figure out what old value of q it had. Most likely $\vec x_P$ is not on the grid, so we don’t have the exact value, but we can get a good approximation by interpolating from $q^n$ at nearby grid points. Trilinear (bilinear in two dimensions) interpolation is often used, though this comes with a serious penalty which we will fix at the end of the chapter.
+Putting this together into a formula, our basic semi-Lagrangian formula, assuming the particle-tracing algorithm has tracked back to location $\vec x_P$(typically with RK2 above), is
 
-  Putting this together into a formula, our basic semi-Lagrangian formula, assuming the particle-tracing algorithm has tracked back to location $\vec x_P$(typically with RK2 above), is
+$$
+q_G^{n+1} = interpolate(q^n, \vec x_P)
+$$
 
-  $$
-  q_G^{n+1} = interpolate(q^n, \vec x_P)
-  $$
+Note that the particle I’ve described is purely hypothetical. No particle is actually created in the computer: we simply use Lagrangian particles to conceptually figure out the update formula for the Eulerian advection step. Because we are almost using a Lagrangian approach to do an Eulerian calculation, this is called the semi-Lagrangian method.
 
-  Note that the particle I’ve described is purely hypothetical. No particle is actually created in the computer: we simply use Lagrangian particles to conceptually figure out the update formula for the Eulerian advection step. Because we are almost using a Lagrangian approach to do an Eulerian calculation, this is called the semi-Lagrangian method.
+Just for completeness, let’s illustrate this in one dimension again, using linear interpolation for the semi-Lagrangian operations. For grid point $x_i$, the particle is traced back to $x_P = x_i - \Delta t u$. Assuming this lies in the interval $[x_j, x_{j+1}]$, and letting $\alpha = (x_P - x_j)/\Delta x$ be the fraction of the interval the point lands in, the linear interpolation is $q_P^n = (1 - \alpha)q_j^n + \alpha q_{j+1}^n$ So our update is
 
-  Just for completeness, let’s illustrate this in one dimension again, using linear interpolation for the semi-Lagrangian operations. For grid point $x_i$, the particle is traced back to $x_P = x_i - \Delta t u$. Assuming this lies in the interval $[x_j, x_{j+1}]$, and letting $\alpha = (x_P - x_j)/\Delta x$ be the fraction of the interval the point lands in, the linear interpolation is $q_P^n = (1 - \alpha)q_j^n + \alpha q_{j+1}^n$ So our update is
+$$
+q_i^{n+1} = (1 - \alpha)q_j^n + \alpha q_{j+1}^n
+$$
 
-  $$
-  q_i^{n+1} = (1 - \alpha)q_j^n + \alpha q_{j+1}^n
-  $$
-
-  In practice we will need to advect the velocity field, and perhaps additional variables such as smoke density or temperature. Usually the additional variables are stored at the grid cell centers, but the velocity components are stored at the staggered grid locations discussed in the previous chapter. In each case, we will need to use the appropriate averaged velocity, given at the end of the previous chapter, to estimate the particle trajectory.
+In practice we will need to advect the velocity field, and perhaps additional variables such as smoke density or temperature. Usually the additional variables are stored at the grid cell centers, but the velocity components are stored at the staggered grid locations discussed in the previous chapter. In each case, we will need to use the appropriate averaged velocity, given at the end of the previous chapter, to estimate the particle trajectory.
 
 ### Simplification:
 
