@@ -1,5 +1,15 @@
 # Incremental-Fluids
 
+## Basic Algorithms
+
+Start with an initial divergence-free velocity field $\vec u^0$.
+
+- For time step n = 0,1,2,...
+- Determine a good time step ∆t to go from time $t_n$ to time $t_{n+1}$.
+  - Set $\vec u^A = advect(\vec u^n, \Delta t, \vec u^n)$
+  - Add $\vec u^B = \vec u^A + \Delta t \vec g$
+  - Set $\vec u^{n+1} = project(\Delta t, \vec u^B)$
+
 ## Render Results
 
 | Notes                 | Render Results                                  |
