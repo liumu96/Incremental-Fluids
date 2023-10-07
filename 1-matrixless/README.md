@@ -243,10 +243,6 @@ $$
 (\nabla \cdot \vec u)_{i,j} \approx \frac{u_{i+1/2,j} - u_{i-1/2,j}}{\Delta x} + \frac{v_{i,j+1/2} - v_{i,j-1/2}}{\Delta x}
 $$
 
-$$
-(\nabla \cdot \vec u)_{i,j} \approx \frac{u_{i+1/2,j} - u_{i-1/2,j}}{\Delta x} + \frac{v_{i,j+1/2} - v_{i,j-1/2}}{\Delta x}
-$$
-
 ```cpp
 /* Builds the pressure right hand side as the negative divergence */
 void buildRhs() {
