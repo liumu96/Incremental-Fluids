@@ -22,7 +22,7 @@ Start with an initial divergence-free velocity field $\vec u^0$.
 
   We’ll say that the location in space of the grid point we’re looking at is $\vec x_G$. We want to find the new value of q at that point, which we’ll call $q_G^{n+1}$. We know from our understanding of advection that if a hypothetical particle with old value $q_P^n$ ends up at $\vec x_G$ , when it moves through the velocity field for the time step $\Delta t$, then $q_G^{n+1} = q_P^n$ . So the question is, how do we figure out $q_P^n$ ?
 
-  ![Alt text](image.png)
+  ![Alt text](./image.png)
   To find a fluid value at grid point $\vec x_G$ at the new time step, we need to know where the fluid at was one time step ago, position $\vec x_P$ , following the velocity field.
 
   The first step is figuring out where this imaginary particle would have started from, a position we’ll call $\vec x_P$. The particle moves according to the simple ordinary differential equation
